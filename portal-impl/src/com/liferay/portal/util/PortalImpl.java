@@ -483,6 +483,13 @@ public class PortalImpl implements Portal {
 
 		_servletContextName =
 			PortalContextLoaderListener.getPortalServlerContextName();
+				
+		if	(ArrayUtil.isEmpty(PropsValues.VIRTUAL_HOSTS_VALID_HOSTS) ||
+			ArrayUtil.contains(
+				PropsValues.VIRTUAL_HOSTS_VALID_HOSTS, StringPool.STAR)) {
+			
+			_validPortalDomainCheckDisabled = true;
+		}
 	}
 
 	@Override
@@ -790,18 +797,8 @@ public class PortalImpl implements Portal {
 			domain = domain.substring(0, pos);
 		}
 
-		if (isValidVirtualHostname(domain)) {
+		if (!_validPortalDomainCheckDisabled && isValidPortalDomain(domain)) {
 			return url;
-		}
-
-		for (String virtualHost : PropsValues.VIRTUAL_HOSTS_VALID_HOSTS) {
-			if (StringUtil.equalsIgnoreCase(domain, virtualHost) ||
-				StringUtil.wildcardMatches(
-					domain, virtualHost, CharPool.QUESTION, CharPool.STAR,
-					CharPool.PERCENT, false)) {
-
-				return url;
-			}
 		}
 
 		try {
@@ -5569,10 +5566,20 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public String getValidPortalDomain(long companyId, String domain) {
-		if (isValidPortalDomain(companyId, domain)) {
+		if (_validPortalDomainCheckDisabled) {
 			return domain;
 		}
 
+		for (String virtualHost : PropsValues.VIRTUAL_HOSTS_VALID_HOSTS) {
+			if (StringUtil.equalsIgnoreCase(domain, virtualHost) ||
+				StringUtil.wildcardMatches(
+					domain, virtualHost, CharPool.QUESTION, CharPool.STAR,
+					CharPool.PERCENT, false)) {
+
+				return domain;
+			}
+		}		
+		
 		if (_log.isWarnEnabled()) {
 			_log.warn(
 				"Set the property \"" + PropsKeys.VIRTUAL_HOSTS_VALID_HOSTS +
@@ -7791,6 +7798,10 @@ public class PortalImpl implements Portal {
 	}
 
 	protected boolean isValidPortalDomain(long companyId, String domain) {
+		if (_validPortalDomainCheckDisabled) {
+			return true;
+		}		
+		
 		if (!Validator.isHostName(domain)) {
 			return false;
 		}
@@ -7824,6 +7835,12 @@ public class PortalImpl implements Portal {
 		return false;
 	}
 
+	protected boolean isValidPortalDomain(String domain) {
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return isValidPortalDomain(companyId, domain);
+	}	
+	
 	protected boolean isValidVirtualHostname(String virtualHostname) {
 		try {
 			virtualHostname = StringUtil.toLowerCase(virtualHostname.trim());
@@ -7977,5 +7994,6 @@ public class PortalImpl implements Portal {
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
 	private String[] _sortedSystemSiteRoles;
+	private boolean _validPortalDomainCheckDisabled;
 
 }
