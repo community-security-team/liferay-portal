@@ -46,7 +46,7 @@ sharingURL.setWindowState(LiferayWindowState.POP_UP);
 				}
 			},
 			id: 'sharingDialog',
-			title: title,
+			title: Liferay.Util.escapeHTML(title),
 			uri: uri
 		});
 	}

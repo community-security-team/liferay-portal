@@ -83,8 +83,6 @@ public abstract class BaseEhcachePortalCacheManagerConfigurator {
 			return;
 		}
 
-		cacheConfiguration.bootstrapCacheLoaderFactory(null);
-
 		List<?> factoryConfigurations =
 			cacheConfiguration.getCacheEventListenerConfigurations();
 

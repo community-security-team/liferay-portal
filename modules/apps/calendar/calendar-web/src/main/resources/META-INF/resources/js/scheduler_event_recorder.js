@@ -582,7 +582,7 @@ AUI.add(
 
 				_syncInviteesContent(contentNode, calendarResources) {
 					var values = calendarResources.map(item => {
-						return item.name;
+						return Lang.String.escapeHTML(item.name);
 					});
 
 					contentNode = A.one(contentNode);

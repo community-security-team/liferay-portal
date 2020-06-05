@@ -596,8 +596,9 @@ public class IconTag extends IncludeTag {
 		String details = null;
 
 		if (_alt != null) {
-			details =
-				" alt=\"" + LanguageUtil.get(_getResourceBundle(), _alt) + "\"";
+			String alt = LanguageUtil.get(_getResourceBundle(), _alt);
+
+			details = " alt=\"" + HtmlUtil.escapeAttribute(alt) + "\"";
 		}
 		else if (isLabel()) {
 			details = " alt=\"\"";
@@ -609,7 +610,8 @@ public class IconTag extends IncludeTag {
 
 			String localizedProcessedMessage = StringPool.BLANK;
 
-			String processedMessage = getProcessedMessage();
+			String processedMessage = HtmlUtil.escapeAttribute(
+				getProcessedMessage());
 
 			if (processedMessage != null) {
 				localizedProcessedMessage = LanguageUtil.get(
@@ -727,7 +729,7 @@ public class IconTag extends IncludeTag {
 
 			sb.append(details);
 			sb.append(" style=\"background-image: url('");
-			sb.append(spriteFileURL);
+			sb.append(HtmlUtil.escapeCSS(spriteFileURL));
 			sb.append("'); background-position: 50% -");
 			sb.append(spriteImage.getOffset());
 			sb.append("px; background-repeat: no-repeat; height: ");

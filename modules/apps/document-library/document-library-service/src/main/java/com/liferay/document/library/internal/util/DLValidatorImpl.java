@@ -23,6 +23,7 @@ import com.liferay.document.library.kernel.exception.InvalidFileVersionException
 import com.liferay.document.library.kernel.exception.SourceFileNameException;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.document.library.kernel.util.DLValidator;
+import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -141,11 +142,17 @@ public final class DLValidatorImpl implements DLValidator {
 
 		boolean validFileExtension = false;
 
-		String[] fileExtensions = _dlConfiguration.fileExtensions();
+		for (String fileExtension : _dlConfiguration.fileExtensions()) {
+			String fileNameExtension = StringUtil.toLowerCase(
+				FileUtil.getExtension(fileName));
 
-		for (String fileExtension : fileExtensions) {
 			if (StringPool.STAR.equals(fileExtension) ||
-				StringUtil.endsWith(fileName, fileExtension)) {
+				StringUtil.equals(
+					fileNameExtension,
+					StringUtil.toLowerCase(
+						StringUtil.replace(
+							fileExtension, CharPool.PERIOD,
+							StringPool.BLANK)))) {
 
 				validFileExtension = true;
 
@@ -261,6 +268,10 @@ public final class DLValidatorImpl implements DLValidator {
 	protected void activate(Map<String, Object> properties) {
 		_dlConfiguration = ConfigurableUtil.createConfigurable(
 			DLConfiguration.class, properties);
+	}
+
+	protected void setDLConfiguration(DLConfiguration dlConfiguration) {
+		_dlConfiguration = dlConfiguration;
 	}
 
 	private String _replaceDLCharLastBlacklist(String title) {

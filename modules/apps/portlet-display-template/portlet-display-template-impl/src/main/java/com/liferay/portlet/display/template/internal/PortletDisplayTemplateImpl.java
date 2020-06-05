@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateHandler;
 import com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil;
-import com.liferay.portal.kernel.template.TemplateManager;
-import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.template.TemplateVariableGroup;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -469,26 +467,13 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		contextObjects.put(
 			TemplateConstants.CLASS_NAME_ID, ddmTemplate.getClassNameId());
 
-		TemplateManager templateManager =
-			TemplateManagerUtil.getTemplateManager(ddmTemplate.getLanguage());
-
 		TemplateHandler templateHandler =
 			TemplateHandlerRegistryUtil.getTemplateHandler(
 				ddmTemplate.getClassNameId());
 
-		templateManager.addContextObjects(
-			contextObjects, templateHandler.getCustomContextObjects());
-
-		// Taglibs
-
-		templateManager.addTaglibSupport(
-			contextObjects, httpServletRequest, httpServletResponse);
+		contextObjects.putAll(templateHandler.getCustomContextObjects());
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
-
-		templateManager.addTaglibTheme(
-			contextObjects, "taglibLiferay", httpServletRequest,
-			new PipingServletResponse(httpServletResponse, unsyncStringWriter));
 
 		contextObjects.put(TemplateConstants.WRITER, unsyncStringWriter);
 
@@ -498,7 +483,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 
 		return transformer.transform(
 			themeDisplay, contextObjects, ddmTemplate.getScript(),
-			ddmTemplate.getLanguage(), unsyncStringWriter);
+			ddmTemplate.getLanguage(), unsyncStringWriter, httpServletRequest,
+			new PipingServletResponse(httpServletResponse, unsyncStringWriter));
 	}
 
 	@Override

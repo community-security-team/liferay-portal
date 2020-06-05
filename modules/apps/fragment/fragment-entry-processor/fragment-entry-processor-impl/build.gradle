@@ -6,7 +6,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.info.api", version: "4.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "3.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.segments.api", version: "1.9.0"
-	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "4.34.0"
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
 	compileOnly group: "javax.portlet", name: "portlet-api", version: "3.0.1"
 	compileOnly group: "org.apache.felix", name: "org.apache.felix.http.servlet-api", version: "1.1.2"
 	compileOnly group: "org.jsoup", name: "jsoup", version: "1.10.2"

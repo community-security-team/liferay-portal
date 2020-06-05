@@ -7,6 +7,19 @@ information about security in Liferay Portal, please see
 **Cumulative diff patch:**  
 [https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch)
 
+The [May 2020]() release contains fixes for the following issues:
+[CST-7213](),
+[CST-7214](),
+[CST-7216](),
+[CST-7217](),
+[CST-7218](),
+[CST-7219](),
+[CST-7220](),
+[CST-7221](),
+[CST-7301](),
+[CST-7302](),
+[CST-7303]()
+
 # Liferay Portal Community Edition License
 
 SPDX-License-Identifier: LGPL-2.1-or-later

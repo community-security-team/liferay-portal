@@ -507,7 +507,9 @@ renderResponse.setTitle((ldapServerId == 0) ? LanguageUtil.get(resourceBundle, "
 
 			var url = null;
 
-			var data = {};
+			var data = {
+				p_auth: '<%= AuthTokenUtil.getToken(request) %>'
+			};
 
 			if (type === 'ldapConnection') {
 				url =
