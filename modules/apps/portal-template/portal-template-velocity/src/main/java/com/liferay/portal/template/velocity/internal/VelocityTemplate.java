@@ -21,10 +21,15 @@ import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.template.AbstractSingleResourceTemplate;
 import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.template.TemplateResourceThreadLocal;
+import com.liferay.taglib.util.VelocityTaglib;
+import com.liferay.taglib.util.VelocityTaglibImpl;
 
 import java.io.Writer;
 
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -41,15 +46,32 @@ public class VelocityTemplate extends AbstractSingleResourceTemplate {
 		TemplateResource errorTemplateResource, Map<String, Object> context,
 		VelocityEngine velocityEngine,
 		TemplateContextHelper templateContextHelper,
-		int resourceModificationCheckInterval) {
+		int resourceModificationCheckInterval, boolean restricted) {
 
 		super(
 			templateResource, errorTemplateResource, context,
 			templateContextHelper, TemplateConstants.LANG_TYPE_VM,
-			resourceModificationCheckInterval);
+			resourceModificationCheckInterval, restricted);
 
 		_velocityContext = new VelocityContext(super.context);
 		_velocityEngine = velocityEngine;
+		_restricted = restricted;
+	}
+
+	@Override
+	public void prepareTaglib(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+
+		VelocityTaglib velocityTaglib = new VelocityTaglibImpl(
+			httpServletRequest.getServletContext(), httpServletRequest,
+			httpServletResponse, context);
+
+		context.put("taglibLiferay", velocityTaglib);
+
+		// Legacy support
+
+		context.put("theme", velocityTaglib);
 	}
 
 	@Override
@@ -91,6 +113,10 @@ public class VelocityTemplate extends AbstractSingleResourceTemplate {
 		TemplateResourceThreadLocal.setTemplateResource(
 			TemplateConstants.LANG_TYPE_VM, templateResource);
 
+		if (_restricted) {
+			RestrictedTemplateThreadLocal.setRestricted(true);
+		}
+
 		try {
 			Template template = _velocityEngine.getTemplate(
 				getTemplateResourceUUID(templateResource),
@@ -101,9 +127,14 @@ public class VelocityTemplate extends AbstractSingleResourceTemplate {
 		finally {
 			TemplateResourceThreadLocal.setTemplateResource(
 				TemplateConstants.LANG_TYPE_VM, null);
+
+			if (_restricted) {
+				RestrictedTemplateThreadLocal.setRestricted(false);
+			}
 		}
 	}
 
+	private final boolean _restricted;
 	private final VelocityContext _velocityContext;
 	private final VelocityEngine _velocityEngine;
 

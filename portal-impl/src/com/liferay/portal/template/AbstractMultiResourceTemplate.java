@@ -31,15 +31,32 @@ import java.util.Map;
  */
 public abstract class AbstractMultiResourceTemplate extends AbstractTemplate {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link
+	 *             #AbstractMultiResourceTemplate(List, TemplateResource, Map,
+	 *             TemplateContextHelper, String, long, boolean)}}
+	 */
+	@Deprecated
 	public AbstractMultiResourceTemplate(
 		List<TemplateResource> templateResources,
 		TemplateResource errorTemplateResource, Map<String, Object> context,
 		TemplateContextHelper templateContextHelper, String templateManagerName,
 		long interval) {
 
+		this(
+			templateResources, errorTemplateResource, context,
+			templateContextHelper, templateManagerName, interval, false);
+	}
+
+	public AbstractMultiResourceTemplate(
+		List<TemplateResource> templateResources,
+		TemplateResource errorTemplateResource, Map<String, Object> context,
+		TemplateContextHelper templateContextHelper, String templateManagerName,
+		long interval, boolean restricted) {
+
 		super(
 			errorTemplateResource, context, templateContextHelper,
-			templateManagerName);
+			templateManagerName, restricted);
 
 		if (ListUtil.isEmpty(templateResources)) {
 			throw new IllegalArgumentException("Template resource is null");

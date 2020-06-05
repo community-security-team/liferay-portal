@@ -64,7 +64,7 @@ entriesChecker.setRememberCheckBoxStateURLRegex("^(?!.*" + liferayPortletRespons
 
 	<div class="document-container" id="<portlet:namespace />entriesContainer">
 		<liferay-ui:search-container
-			emptyResultsMessage='<%= LanguageUtil.format(request, "no-documents-were-found-that-matched-the-keywords-x", keywords) %>'
+			emptyResultsMessage='<%= LanguageUtil.format(request, "no-documents-were-found-that-matched-the-keywords-x", HtmlUtil.escape(keywords)) %>'
 			id="entries"
 			searchContainer="<%= dlSearchContainer %>"
 			total="<%= dlSearchContainer.getTotal() %>"

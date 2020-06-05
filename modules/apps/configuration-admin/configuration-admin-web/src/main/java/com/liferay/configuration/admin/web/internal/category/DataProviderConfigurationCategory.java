@@ -12,25 +12,27 @@
  * details.
  */
 
-package com.liferay.portal.cache.multiple.internal.bootstrap;
+package com.liferay.configuration.admin.web.internal.category;
 
-import com.liferay.portal.cache.PortalCacheBootstrapLoader;
-import com.liferay.portal.cache.PortalCacheBootstrapLoaderFactory;
-
-import java.util.Properties;
+import com.liferay.configuration.admin.category.ConfigurationCategory;
 
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Tina Tian
+ * @author Yuxing Wu
  */
-@Component(immediate = true, service = PortalCacheBootstrapLoaderFactory.class)
-public class ClusterLinkPortalCacheBootstrapLoaderFactory
-	implements PortalCacheBootstrapLoaderFactory {
+@Component(service = ConfigurationCategory.class)
+public class DataProviderConfigurationCategory
+	implements ConfigurationCategory {
 
 	@Override
-	public PortalCacheBootstrapLoader create(Properties properties) {
-		return new ClusterLinkPortalCacheBootstrapLoader(properties);
+	public String getCategoryKey() {
+		return "data-providers";
+	}
+
+	@Override
+	public String getCategorySection() {
+		return "content-and-data";
 	}
 
 }

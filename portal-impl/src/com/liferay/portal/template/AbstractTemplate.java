@@ -28,16 +28,33 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Tina Tian
  */
 public abstract class AbstractTemplate implements Template {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link
+	 *             #AbstractTemplate(TemplateResource, Map,
+	 *             TemplateContextHelper, String, boolean)}}
+	 */
+	@Deprecated
 	public AbstractTemplate(
 		TemplateResource errorTemplateResource, Map<String, Object> context,
 		TemplateContextHelper templateContextHelper,
 		String templateManagerName) {
+
+		this(
+			errorTemplateResource, context, templateContextHelper,
+			templateManagerName, false);
+	}
+
+	public AbstractTemplate(
+		TemplateResource errorTemplateResource, Map<String, Object> context,
+		TemplateContextHelper templateContextHelper, String templateManagerName,
+		boolean restricted) {
 
 		if (templateContextHelper == null) {
 			throw new IllegalArgumentException(
@@ -59,6 +76,7 @@ public abstract class AbstractTemplate implements Template {
 		}
 
 		_templateContextHelper = templateContextHelper;
+		_restricted = restricted;
 	}
 
 	@Override
@@ -122,9 +140,28 @@ public abstract class AbstractTemplate implements Template {
 	}
 
 	@Override
+	public void prepareTaglib(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+	}
+
+	@Override
 	public Object put(String key, Object value) {
 		if ((key == null) || (value == null)) {
 			return null;
+		}
+
+		if (_restricted) {
+			Set<String> restrictedVariables =
+				_templateContextHelper.getRestrictedVariables();
+
+			if (restrictedVariables.contains(key)) {
+				return null;
+			}
+		}
+
+		if (value instanceof Class) {
+			return putClass(key, (Class<?>)value);
 		}
 
 		return context.put(key, value);
@@ -171,6 +208,10 @@ public abstract class AbstractTemplate implements Template {
 	protected abstract void handleException(Exception exception, Writer writer)
 		throws TemplateException;
 
+	protected Object putClass(String key, Class<?> clazz) {
+		return context.put(key, clazz);
+	}
+
 	protected void write(Writer writer) throws TemplateException {
 		Writer oldWriter = (Writer)get(TemplateConstants.WRITER);
 
@@ -190,6 +231,7 @@ public abstract class AbstractTemplate implements Template {
 	protected Map<String, Object> context;
 	protected TemplateResource errorTemplateResource;
 
+	private final boolean _restricted;
 	private final TemplateContextHelper _templateContextHelper;
 
 }

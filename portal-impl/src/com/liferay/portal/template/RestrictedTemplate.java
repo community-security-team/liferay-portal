@@ -24,10 +24,13 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Tina Tian
+ * @author     Tina Tian
+ * @deprecated As of Mueller (7.2.x), with no direct replacement
  */
+@Deprecated
 public class RestrictedTemplate implements Template {
 
 	public RestrictedTemplate(
@@ -90,6 +93,14 @@ public class RestrictedTemplate implements Template {
 	@Override
 	public void prepare(HttpServletRequest request) {
 		_template.prepare(request);
+	}
+
+	@Override
+	public void prepareTaglib(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+
+		_template.prepareTaglib(httpServletRequest, httpServletResponse);
 	}
 
 	@Override

@@ -133,7 +133,7 @@ com.liferay.portal.kernel.dao.search.SearchContainer<com.liferay.portal.kernel.s
 						</c:if>
 
 						<c:if test="<%= searchResultSummaryDisplayContext.isCreatorVisible() %>">
-							<liferay-ui:message key="written-by" /> <strong><%= searchResultSummaryDisplayContext.getCreatorUserName() %></strong>
+							<liferay-ui:message key="written-by" /> <strong><%= HtmlUtil.escape(searchResultSummaryDisplayContext.getCreatorUserName()) %></strong>
 						</c:if>
 
 						<c:if test="<%= searchResultSummaryDisplayContext.isCreationDateVisible() %>">

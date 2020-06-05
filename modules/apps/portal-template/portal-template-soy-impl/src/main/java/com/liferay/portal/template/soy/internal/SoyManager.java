@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateManager;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.template.BaseMultiTemplateManager;
-import com.liferay.portal.template.RestrictedTemplate;
 import com.liferay.portal.template.TemplateContextHelper;
 
 import java.util.HashSet;
@@ -110,17 +109,10 @@ public class SoyManager extends BaseMultiTemplateManager {
 		TemplateResource errorTemplateResource, boolean restricted,
 		Map<String, Object> helperUtilities) {
 
-		Template template = new SoyTemplate(
+		return new SoyTemplate(
 			templateResources, errorTemplateResource, helperUtilities,
 			(SoyTemplateContextHelper)templateContextHelper,
-			_soyTofuCacheHandler);
-
-		if (restricted) {
-			template = new RestrictedTemplate(
-				template, templateContextHelper.getRestrictedVariables());
-		}
-
-		return template;
+			_soyTofuCacheHandler, restricted);
 	}
 
 	@Reference(unbind = "-")

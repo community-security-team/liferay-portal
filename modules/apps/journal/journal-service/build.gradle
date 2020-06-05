@@ -36,7 +36,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.upload.api", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.xstream.configurator.api", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "3.0.0"
-	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.28.0"
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.java", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
 	compileOnly group: "commons-lang", name: "commons-lang", version: "2.1"

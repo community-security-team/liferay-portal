@@ -37,15 +37,33 @@ import java.util.Map;
  */
 public abstract class AbstractSingleResourceTemplate extends AbstractTemplate {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link
+	 *             #AbstractSingleResourceTemplate(TemplateResource,
+	 *             TemplateResource, Map, TemplateContextHelper, String, long,
+	 *             boolean)}}
+	 */
+	@Deprecated
 	public AbstractSingleResourceTemplate(
 		TemplateResource templateResource,
 		TemplateResource errorTemplateResource, Map<String, Object> context,
 		TemplateContextHelper templateContextHelper, String templateManagerName,
 		long interval) {
 
+		this(
+			templateResource, errorTemplateResource, context,
+			templateContextHelper, templateManagerName, interval, false);
+	}
+
+	public AbstractSingleResourceTemplate(
+		TemplateResource templateResource,
+		TemplateResource errorTemplateResource, Map<String, Object> context,
+		TemplateContextHelper templateContextHelper, String templateManagerName,
+		long interval, boolean restricted) {
+
 		super(
 			errorTemplateResource, context, templateContextHelper,
-			templateManagerName);
+			templateManagerName, restricted);
 
 		if (templateResource == null) {
 			throw new IllegalArgumentException("Template resource is null");

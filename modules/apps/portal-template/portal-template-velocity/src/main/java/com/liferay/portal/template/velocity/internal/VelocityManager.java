@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.TemplateResourceLoader;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.template.BaseSingleTemplateManager;
-import com.liferay.portal.template.RestrictedTemplate;
 import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.template.velocity.configuration.VelocityEngineConfiguration;
 import com.liferay.taglib.util.VelocityTaglib;
@@ -62,15 +61,21 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class VelocityManager extends BaseSingleTemplateManager {
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
+	 */
+	@Deprecated
 	@Override
-	public void addTaglibTheme(
-		Map<String, Object> contextObjects, String themeName,
-		HttpServletRequest request, HttpServletResponse response) {
+	public void addTaglibSupport(
+		Map<String, Object> contextObjects,
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
 
 		VelocityTaglib velocityTaglib = new VelocityTaglibImpl(
-			request.getServletContext(), request, response, contextObjects);
+			httpServletRequest.getServletContext(), httpServletRequest,
+			httpServletResponse, contextObjects);
 
-		contextObjects.put(themeName, velocityTaglib);
+		contextObjects.put("taglibLiferay", velocityTaglib);
 
 		contextObjects.put("velocityTaglib_layoutIcon", _layoutIconMethod);
 
@@ -268,17 +273,11 @@ public class VelocityManager extends BaseSingleTemplateManager {
 		TemplateResource errorTemplateResource, boolean restricted,
 		Map<String, Object> helperUtilities) {
 
-		Template template = new VelocityTemplate(
+		return new VelocityTemplate(
 			templateResource, errorTemplateResource, helperUtilities,
 			_velocityEngine, templateContextHelper,
-			_velocityEngineConfiguration.resourceModificationCheckInterval());
-
-		if (restricted) {
-			template = new RestrictedTemplate(
-				template, templateContextHelper.getRestrictedVariables());
-		}
-
-		return template;
+			_velocityEngineConfiguration.resourceModificationCheckInterval(),
+			restricted);
 	}
 
 	private static final Method _layoutIconMethod;

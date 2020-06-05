@@ -939,18 +939,28 @@ public class PortalImpl implements Portal {
 			return url;
 		}
 
-		url = url.trim();
+		String domain = HttpUtil.getDomain(url);
+		String protocol = HttpUtil.getProtocol(url);
 
-		if ((url.charAt(0) == CharPool.SLASH) &&
-			((url.length() == 1) ||
-			 ((url.length() > 1) && (url.charAt(1) != CharPool.SLASH)))) {
+		if (Validator.isBlank(domain)) {
+			if (Validator.isBlank(HttpUtil.getPath(url))) {
+				return null;
+			}
+
+			// Specs allows URL of protocol followed by path, but we do not.
+
+			if (!Validator.isBlank(protocol)) {
+				return null;
+			}
+
+			// The URL is a relative path
 
 			return url;
 		}
 
-		String domain = HttpUtil.getDomain(url);
+		// Specs regards URL staring with double slashes valid, but we do not.
 
-		if (domain.isEmpty()) {
+		if (Validator.isBlank(protocol)) {
 			return null;
 		}
 
@@ -8106,10 +8116,16 @@ public class PortalImpl implements Portal {
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)layout.getLayoutType();
 
-			if (layoutTypePortlet.hasPortletId(portletId, true) &&
-				(getScopeGroupId(layout, portletId) == scopeGroupId)) {
+			if (getScopeGroupId(layout, portletId) != scopeGroupId) {
+				continue;
+			}
 
-				return layout.getPlid();
+			for (Portlet portlet : layoutTypePortlet.getAllPortlets()) {
+				if (portletId.equals(portlet.getPortletId()) ||
+					portletId.equals(portlet.getRootPortletId())) {
+
+					return layout.getPlid();
+				}
 			}
 		}
 
