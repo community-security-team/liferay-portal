@@ -7,23 +7,51 @@ information about security in Liferay Portal, please see
 **Cumulative diff patch:**  
 [https://github.com/community-security-team/liferay-portal/compare/7.1.3-ga4...7.1.3-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.1.3-ga4...7.1.3-cumulative.patch)
 
-The [June 2020](https://github.com/community-security-team/liferay-portal/commit/94535daf406162f259fccceff14357cf91513078)
+The [June 2020](https://github.com/community-security-team/liferay-portal/commit/afda58bf8a7b6c6cc840646d756e90cf01639b35)
 release contains fixes for the following issues:  
-[CST-7150](),
-[CST-7213](),
-[CST-7214](),
-[CST-7215](),
-[CST-7216](),
-[CST-7217](),
-[CST-7218](),
-[CST-7219](),
-[CST-7220](),
-[CST-7221](),
-[CST-7222](),
-[CST-7223](),
-[CST-7301](),
-[CST-7302](),
-[CST-7303]()
+[CST-7150](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317521),
+[CST-7213](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317427),
+[CST-7214](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317439),
+[CST-7215](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317555),
+[CST-7216](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119318646),
+[CST-7217](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119319717),
+[CST-7218](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119319747),
+[CST-7219](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119320878),
+[CST-7220](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119324436),
+[CST-7221](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119326522),
+[CST-7222](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119326537),
+[CST-7223](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119326552),
+[CST-7301](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317396),
+[CST-7302](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317411),
+[CST-7303](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119326567)
+
+The [March 2020](https://github.com/community-security-team/liferay-portal/commit/94535daf406162f259fccceff14357cf91513078)
+release contains fixes for the following issues:  
+[CST-7132](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/117954449),
+[CST-7133](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118080791),
+[CST-7135](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118080894),
+[CST-7136](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118080942),
+[CST-7137](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118080955),
+[CST-7138](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118080994),
+[CST-7139](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118081013),
+[CST-7140](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118081026),
+[CST-7141](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118081039),
+[CST-7142](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118081059),
+[CST-7143](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118081072),
+[CST-7144](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118664243),
+[CST-7145](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118670963),
+[CST-7146](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118671025),
+[CST-7147](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118675447),
+[CST-7148](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118675457),
+[CST-7149](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118762169),
+[CST-7204](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/117954240),
+[CST-7205](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/117954271),
+[CST-7206](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/117954284),
+[CST-7208](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/117954394),
+[CST-7209](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/117954421),
+[CST-7210](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/117954436),
+[CST-7211](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118664044),
+[CST-7212](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/118670924)
 
 # Liferay Portal Community Edition License
 
