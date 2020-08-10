@@ -172,7 +172,8 @@ class EditTags extends Component {
 
 		if (!this.append) {
 			addedTags = finalTags;
-		} else {
+		}
+		else {
 			addedTags = finalTags.filter(
 				tag => this._initialTags.indexOf(tag) == -1
 			);

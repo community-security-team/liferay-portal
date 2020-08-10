@@ -55,9 +55,7 @@ class EditCategories extends Component {
 	created() {
 		this.append = true;
 		this.dataSource = [];
-		this.urlCategories = `/bulk/v1.0/sites/${
-			this.groupIds[0]
-		}/taxonomy-vocabularies/common`;
+		this.urlCategories = `/bulk/v1.0/sites/${this.groupIds[0]}/taxonomy-vocabularies/common`;
 
 		this._feedbackErrorClass = 'form-feedback-item';
 		this._requiredVocabularyErrorMarkupText =
@@ -93,7 +91,8 @@ class EditCategories extends Component {
 
 		if (inputNode.value) {
 			inputNode.parentElement.parentElement.classList.remove('has-error');
-		} else {
+		}
+		else {
 			inputNode.parentElement.parentElement.classList.add('has-error');
 
 			const feedbackErrorNode = inputNode.parentElement.querySelector(
@@ -282,7 +281,8 @@ class EditCategories extends Component {
 
 			if (!this.append) {
 				addedCategories = finalCategories;
-			} else {
+			}
+			else {
 				addedCategories = finalCategories.filter(
 					categoryId =>
 						this.initialCategories.indexOf(categoryId) == -1

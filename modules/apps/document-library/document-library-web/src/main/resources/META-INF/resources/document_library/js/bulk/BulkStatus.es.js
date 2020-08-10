@@ -104,7 +104,8 @@ class BulkStatus extends Component {
 
 		if (error) {
 			message = Liferay.Language.get('an-unexpected-error-occurred');
-		} else {
+		}
+		else {
 			message = Liferay.Language.get('changes-saved');
 		}
 

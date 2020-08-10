@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.upload.UploadFileEntryHandler;
 
@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -68,11 +70,12 @@ public class ImageBlogsUploadFileEntryHandler
 			ActionKeys.ADD_ENTRY);
 
 		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
-
-		_validateFile(fileName, uploadPortletRequest.getSize(_PARAMETER_NAME));
-
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
+
+		_validateFile(
+			fileName, contentType,
+			uploadPortletRequest.getSize(_PARAMETER_NAME));
 
 		try (InputStream inputStream = uploadPortletRequest.getFileAsStream(
 				_PARAMETER_NAME)) {
@@ -116,7 +119,7 @@ public class ImageBlogsUploadFileEntryHandler
 	@Reference(target = "(resource.name=" + BlogsConstants.RESOURCE_NAME + ")")
 	protected PortletResourcePermission portletResourcePermission;
 
-	private void _validateFile(String fileName, long size)
+	private void _validateFile(String fileName, String contentType, long size)
 		throws PortalException {
 
 		long blogsImageMaxSize = _blogsFileUploadsConfiguration.imageMaxSize();
@@ -125,20 +128,20 @@ public class ImageBlogsUploadFileEntryHandler
 			throw new EntryImageSizeException();
 		}
 
-		String extension = FileUtil.getExtension(fileName);
+		Set<String> extensions = MimeTypesUtil.getExtensions(contentType);
 
-		for (String imageExtension :
-				_blogsFileUploadsConfiguration.imageExtensions()) {
+		boolean validContentType = Stream.of(
+			_blogsFileUploadsConfiguration.imageExtensions()
+		).anyMatch(
+			extension ->
+				extension.equals(StringPool.STAR) ||
+				extensions.contains(extension)
+		);
 
-			if (StringPool.STAR.equals(imageExtension) ||
-				imageExtension.equals(StringPool.PERIOD + extension)) {
-
-				return;
-			}
+		if (!validContentType) {
+			throw new EntryImageNameException(
+				"Invalid image for file name " + fileName);
 		}
-
-		throw new EntryImageNameException(
-			"Invalid image for file name " + fileName);
 	}
 
 	private static final String _PARAMETER_NAME = "imageSelectorFileName";

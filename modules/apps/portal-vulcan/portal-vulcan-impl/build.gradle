@@ -62,6 +62,7 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.util.promise", version: "1.1.0"
 	compileOnly group: "org.osgi", name: "osgi.core", version: "6.0.0"
 	compileOnly group: "org.springframework", name: "spring-tx", version: "4.1.9.RELEASE"
+	compileOnly project(":apps:document-library:document-library-api")
 
 	testCompile group: "org.hamcrest", name: "hamcrest-all", version: "1.3"
 }

@@ -588,7 +588,8 @@ if (portletTitleBasedNavigation) {
 
 		if (<%= dlAdminDisplayContext.isVersioningStrategyOverridable() %>) {
 			<portlet:namespace />showVersionDetailsDialog(form);
-		} else {
+		}
+		else {
 			submitForm(form);
 		}
 	}

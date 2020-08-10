@@ -116,6 +116,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -572,6 +573,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			smallImageFileEntryId = addSmallImageFileEntry(
 				entry.getUserId(), entry.getGroupId(), entryId, imageSelector);
 		}
+
+		validate(smallImageFileEntryId);
 
 		entry.setSmallImage(smallImage);
 		entry.setSmallImageFileEntryId(smallImageFileEntryId);
@@ -2259,22 +2262,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			FileEntry fileEntry = _portletFileRepository.getPortletFileEntry(
 				smallImageFileEntryId);
 
-			boolean validSmallImageExtension = false;
-
-			for (String imageExtension :
-					_blogsFileUploadsConfiguration.imageExtensions()) {
-
-				if (StringPool.STAR.equals(imageExtension) ||
-					imageExtension.equals(
-						StringPool.PERIOD + fileEntry.getExtension())) {
-
-					validSmallImageExtension = true;
-
-					break;
-				}
-			}
-
-			if (!validSmallImageExtension) {
+			if (!_isValidImageMimeType(fileEntry)) {
 				throw new EntrySmallImageNameException(
 					"Invalid small image for file entry " +
 						smallImageFileEntryId);
@@ -2468,6 +2456,29 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		return StringPool.BLANK;
+	}
+
+	private boolean _isValidImageMimeType(FileEntry fileEntry) {
+		if (ArrayUtil.contains(
+				_blogsFileUploadsConfiguration.imageExtensions(),
+				StringPool.STAR)) {
+
+			return true;
+		}
+
+		Set<String> extensions = MimeTypesUtil.getExtensions(
+			fileEntry.getMimeType());
+
+		if (Stream.of(
+				_blogsFileUploadsConfiguration.imageExtensions()).anyMatch(
+					extension ->
+						extension.equals(StringPool.STAR) ||
+						extensions.contains(extension))) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private static final String _COVER_IMAGE_FOLDER_NAME = "Cover Image";

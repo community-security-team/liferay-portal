@@ -44,6 +44,9 @@ String coverImageCaption = BeanParamUtil.getString(entry, request, "coverImageCa
 long coverImageFileEntryId = BeanParamUtil.getLong(entry, request, "coverImageFileEntryId");
 long smallImageFileEntryId = BeanParamUtil.getLong(entry, request, "smallImageFileEntryId");
 
+BlogsFileUploadsConfiguration blogsFileUploadsConfiguration = ConfigurationProviderUtil.getSystemConfiguration(BlogsFileUploadsConfiguration.class);
+BlogsGroupServiceSettings blogsGroupServiceSettings = BlogsGroupServiceSettings.getInstance(scopeGroupId);
+
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
@@ -52,8 +55,6 @@ boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getIni
 if (portletTitleBasedNavigation) {
 	renderResponse.setTitle((entry != null) ? BlogsEntryUtil.getDisplayTitle(resourceBundle, entry) : LanguageUtil.get(request, "new-blog-entry"));
 }
-
-BlogsGroupServiceSettings blogsGroupServiceSettings = BlogsGroupServiceSettings.getInstance(scopeGroupId);
 
 BlogsPortletInstanceConfiguration blogsPortletInstanceConfiguration = BlogsPortletInstanceConfigurationUtil.getBlogsPortletInstanceConfiguration(themeDisplay);
 %>
@@ -121,6 +122,11 @@ BlogsPortletInstanceConfiguration blogsPortletInstanceConfiguration = BlogsPortl
 			<liferay-ui:error exception="<%= DuplicateFriendlyURLEntryException.class %>" message="the-url-title-is-already-in-use-please-enter-a-unique-url-title" />
 			<liferay-ui:error exception="<%= EntryContentException.class %>" message="please-enter-valid-content" />
 			<liferay-ui:error exception="<%= EntryCoverImageCropException.class %>" message="an-error-occurred-while-cropping-the-cover-image" />
+
+			<liferay-ui:error exception="<%= EntrySmallImageNameException.class %>">
+				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(blogsFileUploadsConfiguration.imageExtensions()) %>.
+			</liferay-ui:error>
+
 			<liferay-ui:error exception="<%= EntryDescriptionException.class %>" message="please-enter-a-valid-abstract" />
 			<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 			<liferay-ui:error exception="<%= EntryUrlTitleException.class %>" message="please-enter-a-valid-url-title" />
@@ -144,7 +150,6 @@ BlogsPortletInstanceConfiguration blogsPortletInstanceConfiguration = BlogsPortl
 			<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
 
 			<%
-			BlogsFileUploadsConfiguration blogsFileUploadsConfiguration = ConfigurationProviderUtil.getSystemConfiguration(BlogsFileUploadsConfiguration.class);
 			BlogsItemSelectorHelper blogsItemSelectorHelper = (BlogsItemSelectorHelper)request.getAttribute(BlogsWebKeys.BLOGS_ITEM_SELECTOR_HELPER);
 			RequestBackedPortletURLFactory requestBackedPortletURLFactory = RequestBackedPortletURLFactoryUtil.create(liferayPortletRequest);
 			%>

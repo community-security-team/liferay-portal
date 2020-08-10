@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.AccessControlContext;
 import com.liferay.portal.kernel.security.auth.AuthException;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifier;
 import com.liferay.portal.kernel.security.auth.verifier.AuthVerifierResult;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -83,6 +84,12 @@ public class OAuth2RESTAuthVerifier implements AuthVerifier {
 
 			OAuth2Application oAuth2Application =
 				accessToken.getOAuth2Application();
+
+			long companyId = oAuth2Application.getCompanyId();
+
+			if (companyId != CompanyThreadLocal.getCompanyId()) {
+				return authVerifierResult;
+			}
 
 			BearerTokenProvider bearerTokenProvider =
 				_bearerTokenProviderAccessor.getBearerTokenProvider(

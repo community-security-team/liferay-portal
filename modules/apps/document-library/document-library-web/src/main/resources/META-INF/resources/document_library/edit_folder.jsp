@@ -353,7 +353,8 @@ if (portletTitleBasedNavigation) {
 
 		if (!searchContainerData.length) {
 			searchContainerData = [];
-		} else {
+		}
+		else {
 			searchContainerData = searchContainerData.split(',');
 		}
 
@@ -531,7 +532,8 @@ if (portletTitleBasedNavigation) {
 				);
 
 				restrictionTypeWorkflow.show();
-			} else {
+			}
+			else {
 				selectContainer.show();
 			}
 		},
