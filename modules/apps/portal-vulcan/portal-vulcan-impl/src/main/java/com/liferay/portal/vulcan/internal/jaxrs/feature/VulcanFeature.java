@@ -17,6 +17,7 @@ package com.liferay.portal.vulcan.internal.jaxrs.feature;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.fasterxml.jackson.jaxrs.xml.JacksonXMLProvider;
 
+import com.liferay.document.library.kernel.util.DLValidator;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.service.GroupLocalService;
@@ -92,7 +93,6 @@ public class VulcanFeature implements Feature {
 		featureContext.register(JSONMessageBodyWriter.class);
 		featureContext.register(JsonParseExceptionMapper.class);
 		featureContext.register(InvalidFormatExceptionMapper.class);
-		featureContext.register(MultipartBodyMessageBodyReader.class);
 		featureContext.register(NoSuchModelExceptionMapper.class);
 		featureContext.register(ObjectMapperContextResolver.class);
 		featureContext.register(PaginationContextProvider.class);
@@ -114,6 +114,10 @@ public class VulcanFeature implements Feature {
 			new FilterContextProvider(
 				_expressionConvert, _filterParserProvider, _language, _portal));
 		featureContext.register(
+			new MultipartBodyMessageBodyReader(
+				_dlValidator.getMaxAllowableSize()));
+
+		featureContext.register(
 			new SiteValidatorContainerRequestFilter(_groupLocalService));
 
 		featureContext.register(
@@ -129,6 +133,9 @@ public class VulcanFeature implements Feature {
 	}
 
 	private BundleContext _bundleContext;
+
+	@Reference
+	private DLValidator _dlValidator;
 
 	@Reference(
 		target = "(result.class.name=com.liferay.portal.kernel.search.filter.Filter)"
