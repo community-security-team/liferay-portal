@@ -221,6 +221,8 @@ public class ReleaseInfo {
 
 	public static final int RELEASE_7_1_2_BUILD_NUMBER = 7102;
 
+	public static final int RELEASE_7_1_3_BUILD_NUMBER = 7103;
+
 	public static final int RELEASE_7_1_10_BUILD_NUMBER = 7110;
 
 	public static final Date getBuildDate() {
@@ -272,7 +274,7 @@ public class ReleaseInfo {
 		return _VERSION;
 	}
 
-	private static final String _BUILD = "7102";
+	private static final String _BUILD = "7103";
 
 	private static final int _BUILD_NUMBER = GetterUtil.getInteger(_BUILD);
 
@@ -292,9 +294,9 @@ public class ReleaseInfo {
 
 	private static final String _VENDOR = "Liferay, Inc.";
 
-	private static final String _VERSION = "7.1.2";
+	private static final String _VERSION = "7.1.3";
 
-	private static final String _VERSION_DISPLAY_NAME = "7.1.2 CE GA3";
+	private static final String _VERSION_DISPLAY_NAME = "7.1.3 CE GA4";
 
 	private static String _releaseInfo;
 	private static String _serverInfo;
