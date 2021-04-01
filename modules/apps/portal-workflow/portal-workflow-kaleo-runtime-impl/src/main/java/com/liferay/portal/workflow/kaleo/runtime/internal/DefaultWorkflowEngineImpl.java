@@ -277,12 +277,23 @@ public class DefaultWorkflowEngineImpl
 		throws WorkflowException {
 
 		try {
-			KaleoInstance kaleoInstance =
-				kaleoInstanceLocalService.getKaleoInstance(workflowInstanceId);
+			KaleoInstance kaleoInstance = null;
 
-			return _kaleoWorkflowModelConverter.toWorkflowInstance(
-				kaleoInstance,
-				kaleoInstance.getRootKaleoInstanceToken(serviceContext));
+			if (serviceContext.getUserId() > 0) {
+				kaleoInstance = kaleoInstanceLocalService.fetchKaleoInstance(
+					workflowInstanceId, serviceContext.getCompanyId(),
+					serviceContext.getUserId());
+			}
+			else {
+				kaleoInstance = kaleoInstanceLocalService.getKaleoInstance(
+					workflowInstanceId);
+			}
+
+			if (kaleoInstance != null) {
+				return _kaleoWorkflowModelConverter.toWorkflowInstance(
+					kaleoInstance,
+					kaleoInstance.getRootKaleoInstanceToken(serviceContext));
+			}
 		}
 		catch (WorkflowException we) {
 			throw we;
@@ -290,6 +301,8 @@ public class DefaultWorkflowEngineImpl
 		catch (Exception e) {
 			throw new WorkflowException(e);
 		}
+
+		return null;
 	}
 
 	@Override

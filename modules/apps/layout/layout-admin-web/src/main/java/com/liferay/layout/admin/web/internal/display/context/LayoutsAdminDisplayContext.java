@@ -59,6 +59,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
+import com.liferay.portal.kernel.service.LayoutServiceUtil;
 import com.liferay.portal.kernel.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -576,9 +577,9 @@ public class LayoutsAdminDisplayContext {
 
 		JSONArray layoutsJSONArray = JSONFactoryUtil.createJSONArray();
 
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutServiceUtil.getLayouts(
 			getSelGroupId(), privateLayout, parentLayoutId, true,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (Layout layout : layouts) {
 			if (_getActiveLayoutSetBranchId() > 0) {
@@ -634,8 +635,9 @@ public class LayoutsAdminDisplayContext {
 				layoutJSONObject.put("draft", false);
 			}
 
-			int childLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
-				getSelGroup(), layout.isPrivateLayout(), layout.getLayoutId());
+			int childLayoutsCount = LayoutServiceUtil.getLayoutsCount(
+				getSelGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId());
 
 			layoutJSONObject.put("hasChild", childLayoutsCount > 0);
 
@@ -708,8 +710,8 @@ public class LayoutsAdminDisplayContext {
 
 		layoutsSearchContainer.setRowChecker(emptyOnClickRowChecker);
 
-		int layoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
-			getSelGroup(), isPrivateLayout(), getKeywords(),
+		int layoutsCount = LayoutServiceUtil.getLayoutsCount(
+			getSelGroupId(), isPrivateLayout(), getKeywords(),
 			new String[] {
 				LayoutConstants.TYPE_CONTENT, LayoutConstants.TYPE_EMBEDDED,
 				LayoutConstants.TYPE_LINK_TO_LAYOUT,
@@ -718,7 +720,7 @@ public class LayoutsAdminDisplayContext {
 				LayoutConstants.TYPE_URL
 			});
 
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutServiceUtil.getLayouts(
 			getSelGroupId(), isPrivateLayout(), getKeywords(),
 			new String[] {
 				LayoutConstants.TYPE_CONTENT, LayoutConstants.TYPE_EMBEDDED,
@@ -943,9 +945,9 @@ public class LayoutsAdminDisplayContext {
 
 		List<BreadcrumbEntry> breadcrumbEntries = new ArrayList<>();
 
-		List<Layout> curLayouts = layout.getAncestors();
+		List<Layout> ancestorLayouts = layout.getAncestors();
 
-		Collections.reverse(curLayouts);
+		Collections.reverse(ancestorLayouts);
 
 		boolean showLayoutPath = false;
 
@@ -953,17 +955,25 @@ public class LayoutsAdminDisplayContext {
 			showLayoutPath = true;
 		}
 
-		for (Layout curLayout : curLayouts) {
+		for (Layout ancestorLayout : ancestorLayouts) {
 			if (showLayoutPath) {
 				BreadcrumbEntry breadcrumbEntry = new BreadcrumbEntry();
 
-				breadcrumbEntry.setTitle(
-					curLayout.getName(_themeDisplay.getLocale()));
+				if (LayoutPermissionUtil.contains(
+						_themeDisplay.getPermissionChecker(), ancestorLayout,
+						ActionKeys.VIEW)) {
+
+					breadcrumbEntry.setTitle(
+						ancestorLayout.getName(_themeDisplay.getLocale()));
+				}
+				else {
+					breadcrumbEntry.setTitle(StringPool.TRIPLE_PERIOD);
+				}
 
 				breadcrumbEntries.add(breadcrumbEntry);
 			}
 
-			if (curLayout.getPlid() == getSelPlid()) {
+			if (ancestorLayout.getPlid() == getSelPlid()) {
 				showLayoutPath = true;
 			}
 		}
@@ -1170,11 +1180,11 @@ public class LayoutsAdminDisplayContext {
 	}
 
 	public boolean hasLayouts() {
-		int privatePagesCount = LayoutLocalServiceUtil.getLayoutsCount(
-			getSelGroup(), true, 0);
+		int privatePagesCount = LayoutServiceUtil.getLayoutsCount(
+			getSelGroupId(), true, 0);
 
-		int publicPagesCount = LayoutLocalServiceUtil.getLayoutsCount(
-			getSelGroup(), false, 0);
+		int publicPagesCount = LayoutServiceUtil.getLayoutsCount(
+			getSelGroupId(), false, 0);
 
 		if ((privatePagesCount + publicPagesCount) > 0) {
 			return true;
@@ -1222,6 +1232,21 @@ public class LayoutsAdminDisplayContext {
 		}
 
 		return false;
+	}
+
+	public boolean isLayoutReachable(Layout layout) throws PortalException {
+		List<Layout> ancestorLayouts = layout.getAncestors();
+
+		for (Layout ancestorLayout : ancestorLayouts) {
+			if (!LayoutPermissionUtil.contains(
+					_themeDisplay.getPermissionChecker(), ancestorLayout,
+					ActionKeys.VIEW)) {
+
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public boolean isPagesTab() {

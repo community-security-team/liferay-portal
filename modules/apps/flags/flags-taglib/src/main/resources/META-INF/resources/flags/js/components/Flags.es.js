@@ -32,6 +32,7 @@ import FlagsModal from './FlagsModal.es';
 
 const Flags = ({
 	baseData,
+	captchaURI,
 	companyName,
 	disabled = false,
 	forceLogin = false,
@@ -47,6 +48,7 @@ const Flags = ({
 	const [status, setStatus] = useState(
 		forceLogin ? STATUS_LOGIN : STATUS_REPORT
 	);
+	const [error, setError] = useState(null);
 
 	const [otherReason, setOtherReason] = useState('');
 	const [reporterEmailAddress, setReporterEmailAddress] = useState('');
@@ -68,6 +70,7 @@ const Flags = ({
 	};
 
 	const handleClickClose = () => {
+		setError(false);
 		setReportDialogOpen(false);
 	};
 
@@ -105,15 +108,16 @@ const Flags = ({
 		}
 
 		fetch(uri, {
-			body: objectToFormData(formDataObj),
+			body: objectToFormData(formDataObj, new FormData(event.target)),
 			method: 'post'
 		})
-			.then(({status}) => {
+			.then(res => res.json())
+			.then(({error}) => {
 				if (isMounted()) {
-					if (status === Liferay.STATUS_CODE.OK) {
+					setError(error);
+					setIsSending(false);
+					if (!error) {
 						setStatus(STATUS_SUCCESS);
-					} else {
-						setStatus(STATUS_ERROR);
 					}
 				}
 			})
@@ -154,7 +158,9 @@ const Flags = ({
 			</ClayButton>
 			{reportDialogOpen && (
 				<FlagsModal
+					captchaURI={captchaURI}
 					companyName={companyName}
+					error={error}
 					handleClose={handleClickClose}
 					handleInputChange={handleInputChange}
 					handleSubmit={handleSubmitReport}
@@ -172,6 +178,7 @@ const Flags = ({
 };
 Flags.propTypes = {
 	baseData: PropTypes.object.isRequired,
+	captchaURI: PropTypes.string.isRequired,
 	companyName: PropTypes.string.isRequired,
 	disabled: PropTypes.bool,
 	forceLogin: PropTypes.bool,

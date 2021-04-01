@@ -14,58 +14,39 @@
 
 package com.liferay.portal.remote.cors.internal.servlet.filter;
 
+import com.liferay.oauth2.provider.scope.liferay.OAuth2ProviderScopeLiferayAccessControlContext;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.remote.cors.internal.CORSSupport;
 
-import java.io.IOException;
-
 import java.util.Map;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public class CORSServletFilter implements Filter {
+public class CORSServletFilter extends BaseFilter {
 
 	@Override
-	public void destroy() {
-	}
-
-	@Override
-	public final void doFilter(
-			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain filterChain)
-		throws IOException, ServletException {
-
-		HttpServletRequest httpServletRequest =
-			(HttpServletRequest)servletRequest;
+	public boolean isFilterEnabled(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
 
 		if (corsSupport.isCORSRequest(httpServletRequest::getHeader)) {
-			try {
-				processCORSRequest(
-					httpServletRequest, (HttpServletResponse)servletResponse,
-					filterChain);
-			}
-			catch (Exception e) {
-				throw new ServletException(e);
-			}
+			return true;
 		}
-		else {
-			filterChain.doFilter(servletRequest, servletResponse);
-		}
-	}
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
+		return false;
 	}
 
 	public void processCORSRequest(
@@ -89,7 +70,10 @@ public class CORSServletFilter implements Filter {
 
 		if (corsSupport.isValidCORSRequest(
 				httpServletRequest.getMethod(),
-				httpServletRequest::getHeader)) {
+				httpServletRequest::getHeader) &&
+			(OAuth2ProviderScopeLiferayAccessControlContext.
+				isOAuth2AuthVerified() ||
+			 _isGuest())) {
 
 			corsSupport.writeResponseHeaders(
 				httpServletRequest::getHeader, httpServletResponse::setHeader);
@@ -102,6 +86,42 @@ public class CORSServletFilter implements Filter {
 		corsSupport.setCORSHeaders(corsHeaders);
 	}
 
+	@Override
+	protected Log getLog() {
+		return _log;
+	}
+
+	@Override
+	protected void processFilter(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, FilterChain filterChain)
+		throws ServletException {
+
+		try {
+			processCORSRequest(
+				httpServletRequest, httpServletResponse, filterChain);
+		}
+		catch (Exception exception) {
+			throw new ServletException(exception);
+		}
+	}
+
 	protected final CORSSupport corsSupport = new CORSSupport();
+
+	private boolean _isGuest() {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		if (permissionChecker == null) {
+			return true;
+		}
+
+		User user = permissionChecker.getUser();
+
+		return user.isDefaultUser();
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CORSServletFilter.class);
 
 }

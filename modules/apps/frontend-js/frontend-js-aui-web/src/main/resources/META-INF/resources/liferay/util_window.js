@@ -348,7 +348,7 @@ AUI.add(
 					config.title = '&nbsp;';
 				}
 
-				modal.titleNode.html(config.title);
+				modal.titleNode.html(Lang.String.escapeHTML(config.title));
 
 				modal.fillHeight(modal.bodyNode);
 

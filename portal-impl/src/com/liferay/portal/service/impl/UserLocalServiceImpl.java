@@ -1205,10 +1205,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			workflowServiceContext = (ServiceContext)serviceContext.clone();
 		}
 
-		workflowServiceContext.setAttribute("autoPassword", autoPassword);
-		workflowServiceContext.setAttribute("passwordUnencrypted", password1);
-		workflowServiceContext.setAttribute("sendEmail", sendEmail);
-
 		Map<String, Serializable> workflowContext =
 			(Map<String, Serializable>)workflowServiceContext.removeAttribute(
 				"workflowContext");
@@ -1216,6 +1212,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (workflowContext == null) {
 			workflowContext = Collections.emptyMap();
 		}
+
+		workflowServiceContext.setAttributes(
+			new HashMap<String, Serializable>());
+
+		workflowServiceContext.setAttribute("autoPassword", autoPassword);
+		workflowServiceContext.setAttribute("sendEmail", sendEmail);
 
 		user = WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			companyId, WorkflowConstants.DEFAULT_GROUP_ID, workflowUserId,
@@ -1706,8 +1708,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		boolean autoPassword = ParamUtil.getBoolean(
 			serviceContext, "autoPassword");
 
-		String password = (String)serviceContext.getAttribute(
-			"passwordUnencrypted");
+		String password = StringPool.BLANK;
 
 		if (autoPassword) {
 			if (LDAPSettingsUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
@@ -4900,6 +4901,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				null, ServiceContextThreadLocal.getServiceContext());
 		}
 
+		_invalidateTicket(user);
+
 		return user;
 	}
 
@@ -4931,7 +4934,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordModifiedDate(passwordModifiedDate);
 		user.setDigest(StringPool.BLANK);
 
-		userPersistence.update(user);
+		user = userPersistence.update(user);
+
+		_invalidateTicket(user);
 
 		return user;
 	}
@@ -6980,6 +6985,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return localizedValueMap.get(fallbackLocale);
+	}
+
+	private void _invalidateTicket(User user) throws PortalException {
+		List<Ticket> tickets = ticketLocalService.getTickets(
+			user.getCompanyId(), User.class.getName(), user.getUserId(),
+			TicketConstants.TYPE_PASSWORD);
+
+		for (Ticket ticket : tickets) {
+			if (!ticket.isExpired()) {
+				ticketLocalService.updateTicket(
+					ticket.getTicketId(), User.class.getName(),
+					user.getUserId(), TicketConstants.TYPE_PASSWORD,
+					ticket.getExtraInfo(), new Date());
+			}
+		}
 	}
 
 	private void _sendNotificationEmail(

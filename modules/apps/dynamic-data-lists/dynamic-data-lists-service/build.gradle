@@ -4,7 +4,9 @@ buildService {
 }
 
 dependencies {
-	compileInclude group: "org.apache.poi", name: "poi", version: "3.15"
+	compileInclude group: "com.zaxxer", name: "SparseBitSet", version: "1.2"
+	compileInclude group: "org.apache.commons", name: "commons-math3", version: "3.6.1"
+	compileInclude group: "org.apache.poi", name: "poi", version: "4.1.2"
 
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bnd.annotation", version: "4.2.0"
 	compileOnly group: "com.liferay", name: "com.liferay.dynamic.data.lists.api", version: "4.1.0"

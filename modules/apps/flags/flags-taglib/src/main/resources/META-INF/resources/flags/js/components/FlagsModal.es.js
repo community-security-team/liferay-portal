@@ -12,6 +12,7 @@
  * details.
  */
 
+import ClayAlert from '@clayui/alert';
 import ClayButton from '@clayui/button';
 import ClayModal from '@clayui/modal';
 import PropTypes from 'prop-types';
@@ -26,8 +27,11 @@ import {
 	STATUS_SUCCESS
 } from '../constants.es';
 import {sub} from '../utils.es';
+import Captcha from './Captcha.es';
 
 const ModalContentForm = ({
+	captchaURI,
+	error,
 	handleClose,
 	handleInputChange,
 	handleSubmit,
@@ -42,6 +46,14 @@ const ModalContentForm = ({
 	return (
 		<form onSubmit={handleSubmit}>
 			<ClayModal.Body>
+				{error && (
+					<ClayAlert
+						displayType="danger"
+						title={Liferay.Language.get('error')}
+					>
+						{error}
+					</ClayAlert>
+				)}
 				<p>
 					{sub(
 						Liferay.Language.get(
@@ -113,6 +125,7 @@ const ModalContentForm = ({
 						/>
 					</div>
 				)}
+				{captchaURI && <Captcha uri={captchaURI} />}
 			</ClayModal.Body>
 			<ClayModal.Footer
 				last={
@@ -192,7 +205,9 @@ const ModalBody = ({companyName, status}) => {
 };
 
 const FlagsModal = ({
+	captchaURI,
 	companyName,
+	error,
 	handleClose,
 	handleInputChange,
 	handleSubmit,
@@ -211,6 +226,8 @@ const FlagsModal = ({
 			</ClayModal.Header>
 			{status === STATUS_REPORT ? (
 				<ModalContentForm
+					captchaURI={captchaURI}
+					error={error}
 					handleClose={handleClose}
 					handleInputChange={handleInputChange}
 					handleSubmit={handleSubmit}
@@ -244,7 +261,9 @@ const FlagsModal = ({
 };
 
 FlagsModal.propTypes = {
+	captchaURI: PropTypes.string.isRequired,
 	companyName: PropTypes.string.isRequired,
+	error: PropTypes.string,
 	handleClose: PropTypes.func.isRequired,
 	handleInputChange: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,

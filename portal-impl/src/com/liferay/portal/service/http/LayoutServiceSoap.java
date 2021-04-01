@@ -670,6 +670,28 @@ public class LayoutServiceSoap {
 	}
 
 	public static com.liferay.portal.kernel.model.LayoutSoap[] getLayouts(
+			long groupId, boolean privateLayout, String keywords,
+			String[] types, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.portal.kernel.model.Layout> obc)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.portal.kernel.model.Layout> returnValue =
+				LayoutServiceUtil.getLayouts(
+					groupId, privateLayout, keywords, types, start, end, obc);
+
+			return com.liferay.portal.kernel.model.LayoutSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.model.LayoutSoap[] getLayouts(
 			long groupId, String type)
 		throws RemoteException {
 
@@ -746,6 +768,24 @@ public class LayoutServiceSoap {
 		try {
 			int returnValue = LayoutServiceUtil.getLayoutsCount(
 				groupId, privateLayout, parentLayoutId, priority);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getLayoutsCount(
+			long groupId, boolean privateLayout, String keywords,
+			String[] types)
+		throws RemoteException {
+
+		try {
+			int returnValue = LayoutServiceUtil.getLayoutsCount(
+				groupId, privateLayout, keywords, types);
 
 			return returnValue;
 		}

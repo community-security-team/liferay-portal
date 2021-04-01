@@ -127,15 +127,8 @@ public class MyWorkflowTaskPortlet extends MVCPortlet {
 			workflowTask.getOptionalAttributes(), "groupId",
 			themeDisplay.getSiteGroupId());
 
-		if (!_workflowTaskPermissionChecker.hasPermission(
-				groupId, workflowTask, themeDisplay.getPermissionChecker())) {
-
-			throw new PrincipalException(
-				String.format(
-					"User %d does not have permission to view task %d",
-					themeDisplay.getUserId(),
-					workflowTask.getWorkflowTaskId()));
-		}
+		_workflowTaskPermissionChecker.check(
+			groupId, workflowTask, themeDisplay.getPermissionChecker());
 	}
 
 	@Override

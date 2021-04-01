@@ -733,11 +733,20 @@ public class UserNotificationEventLocalServiceWrapper
 	@Override
 	public int getUserNotificationEventsCount(
 		long userId, java.lang.String type, int deliveryType,
-		boolean archived) {
+		boolean delivered) {
 
 		return _userNotificationEventLocalService.
 			getUserNotificationEventsCount(
-				userId, type, deliveryType, archived);
+				userId, type, deliveryType, delivered);
+	}
+
+	@Override
+	public int getUserNotificationEventsCount(
+		long userId, java.lang.String type,
+		java.util.Map<java.lang.String, java.lang.String> payloadParameters) {
+
+		return _userNotificationEventLocalService.
+			getUserNotificationEventsCount(userId, type, payloadParameters);
 	}
 
 	@Override

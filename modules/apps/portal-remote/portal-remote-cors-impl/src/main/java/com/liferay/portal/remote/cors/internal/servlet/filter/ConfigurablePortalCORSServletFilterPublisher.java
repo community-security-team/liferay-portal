@@ -62,7 +62,7 @@ public class ConfigurablePortalCORSServletFilterPublisher {
 
 		Dictionary<String, Object> filterProperties = new HashMapDictionary<>();
 
-		filterProperties.put("before-filter", "Auto Login Filter");
+		filterProperties.put("before-filter", "Upload Servlet Request Filter");
 		filterProperties.put("dispatcher", new String[] {"FORWARD", "REQUEST"});
 		filterProperties.put("servlet-context-name", "");
 		filterProperties.put(

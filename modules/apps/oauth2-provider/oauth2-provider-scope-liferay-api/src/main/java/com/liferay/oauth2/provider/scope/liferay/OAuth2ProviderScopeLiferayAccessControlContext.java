@@ -29,11 +29,18 @@ public class OAuth2ProviderScopeLiferayAccessControlContext {
 		AccessControlContext accessControlContext =
 			AccessControlUtil.getAccessControlContext();
 
+		if (accessControlContext == null) {
+			return false;
+		}
+
 		AuthVerifierResult authVerifierResult =
 			accessControlContext.getAuthVerifierResult();
 
-		if ((authVerifierResult != null) &&
-			AuthVerifierResult.State.SUCCESS.equals(
+		if (authVerifierResult == null) {
+			return false;
+		}
+
+		if (AuthVerifierResult.State.SUCCESS.equals(
 				authVerifierResult.getState())) {
 
 			String authType = MapUtil.getString(

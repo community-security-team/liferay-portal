@@ -99,7 +99,16 @@ public abstract class JSONAction implements Action {
 				_log.warn(se.getMessage());
 			}
 
-			json = JSONFactoryUtil.serializeThrowable(se);
+			if (PropsValues.JSON_SERVICE_SERIALIZE_THROWABLE) {
+				json = JSONFactoryUtil.serializeThrowable(se);
+			}
+			else {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+					se, httpServletRequest, httpServletResponse);
+
+				return null;
+			}
 		}
 		catch (Exception e) {
 			_log.error(e.getMessage());

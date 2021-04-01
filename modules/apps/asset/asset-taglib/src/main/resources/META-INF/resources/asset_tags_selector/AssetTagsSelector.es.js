@@ -126,7 +126,7 @@ class AssetTagsSelector extends Component {
 		const filteredItems = event.target.filteredItems;
 
 		if (!filteredItems || (filteredItems && filteredItems.length === 0)) {
-			const inputValue = event.target.inputValue;
+			const inputValue = Liferay.Util.escape(event.target.inputValue);
 
 			if (inputValue) {
 				const existingTag = this.selectedItems.find(
