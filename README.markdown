@@ -7,7 +7,7 @@ information about security in Liferay Portal, please see
 **Cumulative diff patch:**  
 [https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch)
 
-The [September 2020]() release contains fixes for the following issues:
+The [September 2020](https://github.com/community-security-team/liferay-portal/commit/ed211f44d636d07647d7b8e2d1f0b0016866ab15) release contains fixes for the following issues:
 [CST-7224](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119784785),
 [CST-7225](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119784802),
 [CST-7226](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119784815),
@@ -23,7 +23,7 @@ The [September 2020]() release contains fixes for the following issues:
 [CST-7316](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119784916),
 [CST-7317](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119784928)
 
-The [June 2020]() release contains fixes for the following issues:
+The [June 2020](https://github.com/community-security-team/liferay-portal/commit/064e6b01afa1e087e4c6bbaf7f71c97ee33f3ee9) release contains fixes for the following issues:
 [CST-7213](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317427),
 [CST-7214](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119317439),
 [CST-7216](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119318646),
