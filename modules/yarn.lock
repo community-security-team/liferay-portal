@@ -1647,6 +1647,13 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
+"@liferay/jquery-form@3.51.0-liferay.1":
+  version "3.51.0-liferay.1"
+  resolved "https://registry.yarnpkg.com/@liferay/jquery-form/-/jquery-form-3.51.0-liferay.1.tgz#a8e2e2fce01d1e57cd4577c20cdfc9e848c25de3"
+  integrity sha512-azhkvLNK1PSCjboBTmixl82PzTvnoF7ofJv1UvPG2hT33mAuJYaGIgPp+AzGNpcuPhlU2b1X3PoOYsrNlh4D0g==
+  dependencies:
+    jquery ">=1.5"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -10660,6 +10667,11 @@ jquery@3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
+
+jquery@>=1.5:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
 
 js-base64@^2.1.8:
   version "2.5.1"

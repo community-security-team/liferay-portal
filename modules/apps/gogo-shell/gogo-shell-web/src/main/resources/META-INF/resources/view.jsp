@@ -50,7 +50,7 @@ String prompt = (String)SessionMessages.get(renderRequest, "prompt");
 		<c:if test="<%= Validator.isNotNull(commandOutput) %>">
 			<b><liferay-ui:message key="output" /></b>
 
-			<pre><%= commandOutput %></pre>
+			<pre><%= HtmlUtil.escape(commandOutput) %></pre>
 		</c:if>
 	</aui:form>
 </div>

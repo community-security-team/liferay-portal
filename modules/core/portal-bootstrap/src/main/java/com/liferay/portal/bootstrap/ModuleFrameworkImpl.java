@@ -999,6 +999,10 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 	private String _extractFileName(String string) {
 		int endIndex = string.indexOf(CharPool.DASH);
 
+		if (string.startsWith("com.fasterxml.jackson.core.jackson")) {
+			endIndex = string.lastIndexOf(CharPool.DASH);
+		}
+
 		if (endIndex == -1) {
 			endIndex = string.indexOf(CharPool.QUESTION);
 

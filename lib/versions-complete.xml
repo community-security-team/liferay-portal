@@ -5693,7 +5693,7 @@
 			</library>
 			<library>
 				<file-name>lib/portal/commons-httpclient.jar</file-name>
-				<version>3.1.0</version>
+				<version>3.1.LIFERAY-PATCHED-1</version>
 				<project-name>Commons HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpclient-legacy/index.html</project-url>
 				<licenses>

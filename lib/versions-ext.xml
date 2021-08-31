@@ -552,7 +552,7 @@
 			</library>
 			<library>
 				<file-name>lib/development/mysql.jar</file-name>
-				<version>8.0.16</version>
+				<version>8.0.21</version>
 				<project-name>MySQL Connector/J</project-name>
 				<project-url>http://www.mysql.com/products/connector/j</project-url>
 				<licenses>
@@ -1387,7 +1387,7 @@
 			</library>
 			<library>
 				<file-name>lib/portal/commons-httpclient.jar</file-name>
-				<version>3.1.0</version>
+				<version>3.1.LIFERAY-PATCHED-1</version>
 				<project-name>Commons HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpclient-legacy/index.html</project-url>
 				<licenses>
@@ -3359,7 +3359,7 @@
 			</library>
 			<library>
 				<file-name>lib/portal/xstream.jar</file-name>
-				<version>1.4.14</version>
+				<version>1.4.15</version>
 				<project-name>XStream</project-name>
 				<project-url>http://xstream.codehaus.org</project-url>
 				<licenses>

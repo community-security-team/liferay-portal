@@ -67,7 +67,7 @@
 					XugglerInstallException xie = (XugglerInstallException)errorException;
 					%>
 
-					<liferay-ui:message arguments="<%= xie.getMessage() %>" key="an-unexpected-error-occurred-while-installing-xuggler-x" translateArguments="<%= false %>" />
+					<liferay-ui:message arguments="<%= HtmlUtil.escape(xie.getMessage()) %>" key="an-unexpected-error-occurred-while-installing-xuggler-x" translateArguments="<%= false %>" />
 				</liferay-ui:error>
 
 				<c:choose>

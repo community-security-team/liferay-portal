@@ -2,9 +2,9 @@ dependencies {
 	compileInclude group: "com.notnoop.apns", name: "apns", version: "1.0.0.Beta6"
 
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bnd.annotation", version: "4.2.0"
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.10"
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.10"
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.10.1"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.10.3"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.10.3"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.10.5.1"
 	compileOnly group: "com.liferay", name: "com.liferay.osgi.util", version: "5.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.configuration.metatype.api", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.push.notifications.api", version: "3.0.0"

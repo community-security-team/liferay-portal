@@ -21,10 +21,10 @@ dependencies {
 	compileInclude group: "com.liferay", name: "org.elasticsearch.xpack.core", version: elasticsearchVersion
 	compileInclude group: "com.tdunning", name: "t-digest", version: "3.2"
 	compileInclude group: "com.twitter", name: "jsr166e", version: "1.1.0"
-	compileInclude group: "com.unboundid", name: "unboundid-ldapsdk", version: "4.0.2"
+	compileInclude group: "com.unboundid", name: "unboundid-ldapsdk", version: "4.0.14"
 	compileInclude group: "commons-io", name: "commons-io", version: "2.6"
 	compileInclude group: "commons-lang", name: "commons-lang", version: "2.6"
-	compileInclude group: "io.netty", name: "netty-all", version: "4.1.11.Final"
+	compileInclude group: "io.netty", name: "netty-all", version: "4.1.48.Final"
 	compileInclude group: "joda-time", name: "joda-time", version: "2.9.5"
 	compileInclude group: "net.sf.jopt-simple", name: "jopt-simple", version: "5.0.2"
 	compileInclude group: "net.sf.supercsv", name: "super-csv", version: "2.1.0"
@@ -45,9 +45,9 @@ dependencies {
 	compileInclude group: "org.apache.lucene", name: "lucene-sandbox", version: luceneVersion
 	compileInclude group: "org.apache.lucene", name: "lucene-spatial", version: luceneVersion
 	compileInclude group: "org.apache.lucene", name: "lucene-suggest", version: luceneVersion
-	compileInclude group: "org.bouncycastle", name: "bcpg-jdk15on", version: "1.59"
-	compileInclude group: "org.bouncycastle", name: "bcpkix-jdk15on", version: "1.59"
-	compileInclude group: "org.bouncycastle", name: "bcprov-jdk15on", version: "1.59"
+	compileInclude group: "org.bouncycastle", name: "bcpg-jdk15on", version: "1.61"
+	compileInclude group: "org.bouncycastle", name: "bcpkix-jdk15on", version: "1.61"
+	compileInclude group: "org.bouncycastle", name: "bcprov-jdk15on", version: "1.61"
 	compileInclude group: "org.elasticsearch", name: "elasticsearch", version: elasticsearchVersion
 	compileInclude group: "org.elasticsearch", name: "elasticsearch-cli", version: elasticsearchVersion
 	compileInclude group: "org.elasticsearch", name: "elasticsearch-core", version: elasticsearchVersion
@@ -66,7 +66,7 @@ dependencies {
 	compileInclude group: "org.ow2.asm", name: "asm-debug-all", version: "5.1"
 	compileInclude group: "org.yaml", name: "snakeyaml", version: "1.17"
 
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.10"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.10.3"
 	compileOnly group: "com.ibm.icu", name: "icu4j", version: "61.1"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "3.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.configuration.metatype.api", version: "2.0.0"
