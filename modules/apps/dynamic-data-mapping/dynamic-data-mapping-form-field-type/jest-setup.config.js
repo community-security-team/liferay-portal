@@ -85,6 +85,7 @@ const sub = function (string, data) {
 
 window.util = {
 	...window.util,
+	escape: (data) => data,
 	selectEntity: () => {},
 	sub,
 };

@@ -941,29 +941,31 @@ public class PortalImpl implements Portal {
 			return null;
 		}
 
-		String domain = uri.getHost();
+		String decodedURL = HttpUtil.decodeURL(url);
 
-		String protocol = uri.getScheme();
+		if (Validator.isNotNull(uri.getPath()) &&
+			decodedURL.startsWith(HttpUtil.decodeURL(uri.getPath()))) {
 
-		if (domain == null) {
-			if (uri.getPath() == null) {
-				return null;
-			}
-
-			// Specs allow URL of protocol followed by path, but we do not
-
-			if (protocol != null) {
-				return null;
-			}
-
-			// The URL is a relative path
+			// Relative URL
 
 			return url;
 		}
 
-		// Specs regard URL starting with double slashes as valid, but we do not
+		String protocol = uri.getScheme();
 
 		if (protocol == null) {
+
+			// Protocol is required
+
+			return null;
+		}
+
+		String domain = uri.getHost();
+
+		if (Validator.isNull(domain)) {
+
+			// Absolute URL must have a domain
+
 			return null;
 		}
 

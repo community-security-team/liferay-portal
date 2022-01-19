@@ -493,6 +493,9 @@ public class SiteBrowserDisplayContext {
 
 			_groupParams.put("usersGroups", user.getUserId());
 		}
+		else {
+			_groupParams.put("actionId", ActionKeys.ASSIGN_MEMBERS);
+		}
 
 		_groupParams.put("site", Boolean.TRUE);
 

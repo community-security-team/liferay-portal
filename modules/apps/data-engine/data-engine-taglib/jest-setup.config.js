@@ -39,6 +39,7 @@ window.themeDisplay = {
 
 window.util = {
 	...window.util,
+	escape: (data) => data,
 	selectEntity: () => {},
 };
 

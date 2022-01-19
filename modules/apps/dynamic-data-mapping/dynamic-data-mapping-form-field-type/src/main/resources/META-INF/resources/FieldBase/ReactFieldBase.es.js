@@ -153,16 +153,18 @@ function FieldBase({
 	}
 
 	if (tip) {
-		fieldDetails += tip + '<br>';
+		fieldDetails += Liferay.Util.escape(tip) + '<br>';
 	}
 
 	if (text) {
 		fieldDetails +=
-			(typeof text === 'object' ? text.content : text) + '<br>';
+			(typeof text === 'object'
+				? Liferay.Util.escape(text.content)
+				: Liferay.Util.escape(text)) + '<br>';
 	}
 
 	if (hasError) {
-		fieldDetails += errorMessage;
+		fieldDetails += Liferay.Util.escape(errorMessage);
 	}
 	else if (required) {
 		fieldDetails += requiredText;
