@@ -1,15 +1,22 @@
-## The Liferay Development Team
+# Information
 
-Liferay Portal is produced by the worldwide Liferay engineering team, and
-involves many hours of development, testing, writing documentation, and working
-with the wider Liferay community of customers, partners, and open source
-developers. We are glad you have chosen Liferay Portal, and hope that it meets
-or exceeds your expectations!
+This fork provides security patches for Liferay Portal 7.3.7. For more 
+information about security in Liferay Portal, please see 
+[https://portal.liferay.dev/learn/security](https://portal.liferay.dev/learn/security).
 
-In addition to Liferay's engineering staff, a special thanks goes to the many
-open source developers who volunteer their time and energy to help with the
-release, whether it was bug fixing, idea generation, documentation,
-translations, or other contributions that helped to improve this release.
+**Cumulative diff patch:**  
+[https://github.com/community-security-team/liferay-portal/compare/7.3.7-ga8...7.3.7-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.3.7-ga8...7.3.7-cumulative.patch)
+
+The [January 2022](https://github.com/community-security-team/liferay-portal/commit/1bfe0fddb35dda44f9a0319d3c6377b439971ca7) release contains fixes for the following issues:
+[CVE-TBA-08](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205782),
+[CVE-TBA-09](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205804),
+[CVE-TBA-10](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205823),
+[CVE-TBA-11](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205844),
+[CVE-TBA-12](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205860),
+[CVE-TBA-13](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205896),
+[CVE-TBA-14](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205953),
+[CVE-TBA-15](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205974),
+[CVE-TBA-19](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125206055) and updates to external libraries with known vulnerabilities.
 
 ## Liferay Portal Community Edition License
 
