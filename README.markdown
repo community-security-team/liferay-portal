@@ -8,6 +8,7 @@ information about security in Liferay Portal, please see
 [https://github.com/community-security-team/liferay-portal/compare/7.3.7-ga8...7.3.7-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.3.7-ga8...7.3.7-cumulative.patch)
 
 The [January 2022](https://github.com/community-security-team/liferay-portal/commit/1bfe0fddb35dda44f9a0319d3c6377b439971ca7) release contains fixes for the following issues:
+[CVE-2022-01](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125206055),
 [CVE-TBA-08](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205782),
 [CVE-TBA-09](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205804),
 [CVE-TBA-10](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205823),
@@ -15,8 +16,7 @@ The [January 2022](https://github.com/community-security-team/liferay-portal/com
 [CVE-TBA-12](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205860),
 [CVE-TBA-13](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205896),
 [CVE-TBA-14](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205953),
-[CVE-TBA-15](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205974),
-[CVE-TBA-19](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125206055) and updates to external libraries with known vulnerabilities.
+[CVE-TBA-15](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205974) and updates to external libraries with known vulnerabilities.
 
 ## Liferay Portal Community Edition License
 
