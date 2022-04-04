@@ -8,10 +8,10 @@ information about security in Liferay Portal, please see
 [https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch)
 
 The [August 2021](https://github.com/community-security-team/liferay-portal/commit/1bfe0fddb35dda44f9a0319d3c6377b439971ca7) release contains fixes for the following issues:
-[CVE-TBA-01](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882392),
-[CVE-TBA-03](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882437),
-[CVE-TBA-06](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882524),
-[CVE-TBA-07](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882562) and updates to external libraries with known vulnerabilities.
+[CVE-2021-38269](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882392),
+[CVE-2021-38263](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882437),
+[CVE-2021-38268](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882524),
+[CVE-2021-38266](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120882562) and updates to external libraries with known vulnerabilities.
 
 The [May 2021](https://github.com/community-security-team/liferay-portal/commit/ce56c3137a8a97ffdad8a3e95ede563dd97c946f) release contains fixes for the following issues:
 [CST-7227](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120741510),
