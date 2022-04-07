@@ -37,7 +37,7 @@ The [May 2021](https://github.com/community-security-team/liferay-portal/commit/
 [CVE-2021-33335](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120747906),
 [CVE-2021-33338](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120748276),
 [CVE-2021-33339](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120747934),
-[CVE-TBA-7335](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120747817) and updates to external libraries with known vulnerabilities.
+[CVE-2022-26596](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/120747817) and updates to external libraries with known vulnerabilities.
 
 The [September 2020](https://github.com/community-security-team/liferay-portal/commit/ed211f44d636d07647d7b8e2d1f0b0016866ab15) release contains fixes for the following issues:
 [CST-7224](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/119784785),
