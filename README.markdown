@@ -13,10 +13,10 @@ The [January 2022](https://github.com/community-security-team/liferay-portal/com
 [CVE-2022-26594](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205823),
 [CVE-2022-26595](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205844),
 [CVE-2022-26597](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205782),
-[CVE-TBA-12](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205860),
-[CVE-TBA-13](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205896),
-[CVE-TBA-14](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205953),
-[CVE-TBA-15](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205974) and updates to external libraries with known vulnerabilities.
+[CVE-2022-28977](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205860),
+[CVE-2022-28978](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205896),
+[CVE-2022-28979](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205974),
+[CVE-2022-28982](https://portal.liferay.dev/learn/security/known-vulnerabilities/-/asset_publisher/HbL5mxmVrnXW/content/id/125205953) and updates to external libraries with known vulnerabilities.
 
 ## Liferay Portal Community Edition License
 
