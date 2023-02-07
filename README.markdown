@@ -2,7 +2,7 @@
 
 This fork provides security patches for Liferay Portal 7.1.3. For more
 information about security in Liferay Portal, please see
-[https://portal.liferay.dev/learn/security](https://portal.liferay.dev/learn/security).
+[https://liferay.dev/portal/security](https://liferay.dev/portal/security).
 
 **Cumulative diff patch:**  
 [https://github.com/community-security-team/liferay-portal/compare/7.1.3-ga4...7.1.3-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.1.3-ga4...7.1.3-cumulative.patch)
