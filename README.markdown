@@ -2,7 +2,7 @@
 
 This fork provides security patches for Liferay Portal 7.2.1. For more 
 information about security in Liferay Portal, please see 
-[https://portal.liferay.dev/learn/security](https://portal.liferay.dev/learn/security).
+[https://liferay.dev/portal/security](https://liferay.dev/portal/security).
 
 **Cumulative diff patch:**  
 [https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch](https://github.com/community-security-team/liferay-portal/compare/7.2.1-ga2...7.2.1-cumulative.patch)
